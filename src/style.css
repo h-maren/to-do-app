@@ -9,3 +9,11 @@ body {
     flex-direction: column;
     align-items: flex-start;
 }
+
+form.hidden {
+    display:none;
+}
+
+button.hidden {
+    display:none;
+}
