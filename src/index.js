@@ -8,7 +8,7 @@ import {toDoItem} from './todocreate.js';
 const addToDoButton=document.querySelector(".add-todo");
 const addToDoForm=document.querySelector("#newtaskform");
 const cancelBtn=document.querySelector("#cancelBtn");
-
+const toDoContent=document.querySelector(".todo-content");
 
 addToDoButton.addEventListener("click", () => {
     addToDoForm.classList.remove("hidden");
@@ -17,8 +17,13 @@ addToDoButton.addEventListener("click", () => {
 
 
 
+
+
 const item1= new toDoItem("farts","fart", new Date('1995-12-17T03:24:00'),1);
 console.log(item1);
+console.log(item1.displayToDoItem());
+const itemInformation=item1.displayToDoItem();
+toDoContent.insertBefore(itemInformation,addToDoButton);
 
 const addItemBtn=document.querySelector("#addNewItemButton");
 addItemBtn.addEventListener("click", item1.displayToDoItem());

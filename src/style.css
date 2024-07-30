@@ -17,3 +17,9 @@ form.hidden {
 button.hidden {
     display:none;
 }
+
+.todo-display-toprow {
+    display: flex;
+    /*justify-content: space-between;
+    align-items: center;*/
+}
