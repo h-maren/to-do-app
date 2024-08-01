@@ -1,10 +1,11 @@
 //create form for input
-class toDoItem {
-    constructor(title,description,dueDate,priority){
+class ToDoItem {
+    constructor(title,description,dueDate,priority,complete){
         this.title=title;
         this.description=description,
         this.dueDate=dueDate,
         this.priority=priority;
+        this.complete=Boolean;
     };
     displayToDoItem(){
         //create base container
@@ -67,4 +68,4 @@ class toDoItem {
 };
 
 
-export {toDoItem};
+export {ToDoItem};
