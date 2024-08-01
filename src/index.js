@@ -1,6 +1,7 @@
 import './style.css';
 import {ToDoItem} from './todocreate.js';
 import {Project} from './projectcreate.js';
+import {Form} from './createInputForm.js';
 //import {inputTitle} from './todocreate.js';
 //import {title,cafeInfo} from './loadmain.js';
 //import {title as menuTitle, menu} from './menu.js';
@@ -9,16 +10,16 @@ import {Project} from './projectcreate.js';
 let projectList=[];
 
 const addToDoButton=document.querySelector(".add-todo");
-const addToDoForm=document.querySelector("#newtaskform");
 const cancelBtn=document.querySelector("#cancelBtn");
 const toDoContent=document.querySelector(".todo-content");
 const expandBtn=document.querySelector(".expand-btn");
+const formBtnRow=document.querySelector(".form-btn-row");
 
 
-addToDoButton.addEventListener("click", () => {
+/*addToDoButton.addEventListener("click", () => {
     addToDoForm.classList.remove("hidden");
     addToDoButton.classList.add("hidden");
-});
+});*/
 
 cancelBtn.addEventListener("click", () => {
     addToDoForm.classList.add("hidden");
@@ -50,7 +51,8 @@ console.log(addItemBtn);
     let newToDoItem=new toDoItem(inputTitle,inputDescription,inputDueDate,inputPriority);
     projects.push(newToDoItem);
 });*/
-addItemBtn.addEventListener("click", () => {
+
+function addItem(){
     const inputTitle=document.querySelector("input#title").value;
     const inputDescription=document.querySelector("input#description").value;
     const inputDueDate=document.querySelector("input#dueDate").value;
@@ -62,9 +64,25 @@ addItemBtn.addEventListener("click", () => {
     currentProject.toDoItems.push(newToDoItem);
     console.log(currentProject);
     //alert(newToDoItem);
-    addToDoForm.reset();
+    Form.reset();
+    Form.classList.add("hidden");
+    formBtnRow.classList.add("hidden");
+    //const addToDoForm=document.querySelector("#newtaskform");
     //projects.push(newToDoItem);
     //alert(projects);
+};
+
+addItemBtn.addEventListener("click",addItem);
+
+function openForm() {
+    formBtnRow.classList.remove("hidden");
+
+};
+
+addToDoButton.addEventListener("click", ()=> {
+    toDoContent.insertBefore(Form,formBtnRow);
+    Form.classList.remove("hidden");
+    formBtnRow.classList.remove("hidden");
 });
 
 

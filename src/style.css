@@ -10,12 +10,8 @@ body {
     align-items: flex-start;
 }
 
-form.hidden {
-    display:none;
-}
-
-button.hidden {
-    display:none;
+.hidden {
+    display: none;
 }
 
 .todo-display-toprow {
