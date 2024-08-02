@@ -1,11 +1,16 @@
 //create form for input
+import {expandRows} from './expandRows.js';
+import {deleteItem} from './deleteItem.js';
+import {editItem} from './editItem.js';
+
 class ToDoItem {
-    constructor(title,description,dueDate,priority,complete){
+    constructor(title,description,dueDate,priority,complete,projectTitle){
         this.title=title;
         this.description=description,
         this.dueDate=dueDate,
         this.priority=priority;
-        this.complete=Boolean;
+        this.complete=false;
+        this.projectTitle=projectTitle;
     };
     displayToDoItem(){
         //create base container
@@ -36,14 +41,14 @@ class ToDoItem {
         const itemExpandButton=document.createElement("button");
         itemExpandButton.classList.add("expand-btn");
         itemExpandButton.textContent="+";
+        itemExpandButton.addEventListener("click",expandRows);
         itemRow1.appendChild(itemExpandButton);
-
         toDoContainer.appendChild(itemRow1);
 
         //create other rows which will remain hidden
         const itemRow2=document.createElement("div");
         itemRow2.classList.add("todo-display-row2");
-        itemRow2.classList.add("hidden-item-row");
+        itemRow2.classList.add("hidden");
         const itemPriority=document.createElement("div");
         itemPriority.textContent=`Priority: ${this.priority}`;
         itemRow2.appendChild(itemPriority);
@@ -52,20 +57,36 @@ class ToDoItem {
 
         const itemRow3=document.createElement("div");
         itemRow3.classList.add("todo-display-row3");
-        itemRow3.classList.add("hidden-item-row");
+        itemRow3.classList.add("hidden");
         const itemDescription=document.createElement("p");
         itemDescription.textContent=`${this.description}`;
         itemRow3.appendChild(itemDescription);
 
-        toDoContainer.appendChild(itemRow3);      
+        toDoContainer.appendChild(itemRow3);
+        
+        const itemRow4=document.createElement("div");
+        itemRow4.classList.add("todo-button-row");
+        itemRow4.classList.add("hidden");
+        //these will be edit and delete buttons
+        const deleteItemBtn=document.createElement("button");
+        deleteItemBtn.classList.add("delete-item-btn");
+        deleteItemBtn.textContent="Delete";
+        deleteItemBtn.addEventListener("click",deleteItem);
+        itemRow4.appendChild(deleteItemBtn);
+        const editItemBtn=document.createElement("button");
+        editItemBtn.classList.add("edit-item-btn");
+        editItemBtn.textContent="Edit";
+        editItemBtn.addEventListener("click",editItem);
+        itemRow4.appendChild(editItemBtn);
 
+        toDoContainer.appendChild(itemRow4);
 
+        return toDoContainer;
 
         //here write the display for the item, leave getting input data in main index or another function
         //console.log("alert!");
-        return toDoContainer;
+
     };
 };
-
 
 export {ToDoItem};
