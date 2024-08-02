@@ -35,6 +35,7 @@ class ToDoItem {
         itemRow1.appendChild(itemTitleDisplay);
 
         const itemDueDate=document.createElement("div");
+        itemDueDate.classList.add("dueDate-display");
         itemDueDate.textContent=`Due: ${Date(this.dueDate)}`;
         itemRow1.appendChild(itemDueDate);
 
@@ -50,6 +51,7 @@ class ToDoItem {
         itemRow2.classList.add("todo-display-row2");
         itemRow2.classList.add("hidden");
         const itemPriority=document.createElement("div");
+        itemPriority.classList.add("prio-display");
         itemPriority.textContent=`Priority: ${this.priority}`;
         itemRow2.appendChild(itemPriority);
 

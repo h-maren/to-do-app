@@ -72,4 +72,4 @@ cancelBtn.textContent="Cancel";
 row5.appendChild(cancelBtn);
 Form.appendChild(row5);*/
 
-export {Form};
+export {Form,titleInput,descriptionInput,dueDateInput,priorityInput};
