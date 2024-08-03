@@ -10,10 +10,6 @@ class Project {
         titleProjectDisplay.textContent=`${this.projectTitle}`;
         return titleProjectDisplay;
     };
-    removeItem(itemToDeleteTitle) {
-        let itemIndex=this.toDoItems.indexOf(itemToDeleteTitle);
-        this.toDoItems.splice(itemIndex,1);
-    };
 };
 
 export {Project};

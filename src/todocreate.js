@@ -1,7 +1,8 @@
 //create form for input
-import {expandRows} from './expandRows.js';
-import {deleteItem} from './deleteItem.js';
-import {editItem} from './editItem.js';
+import { expandRows } from './expandRows.js';
+import { deleteItem } from './deleteItem.js';
+import { editItem } from './editItem.js';
+import { changeItemDone } from './changeItemDone.js';
 
 class ToDoItem {
     constructor(title,description,dueDate,priority,complete,projectTitle){
@@ -26,9 +27,11 @@ class ToDoItem {
         const itemCheck=document.createElement("input");
         itemCheck.setAttribute("type","checkbox");
         itemCheck.setAttribute("id","itemTitle");
+        itemCheck.addEventListener("change",changeItemDone);
         const itemLabel=document.createElement("label");
         itemLabel.setAttribute("for","itemTitle");
         itemLabel.textContent=`${this.title}`;
+        itemLabel.classList.add(`${this.title}`);
 
         itemTitleDisplay.appendChild(itemCheck);
         itemTitleDisplay.appendChild(itemLabel);
