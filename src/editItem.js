@@ -4,9 +4,11 @@ import { ToDoItem } from './todocreate';
 
 
 const editItem = (function (e){
-    //TO FIX
+    let taskForm=e.target.parentElement.parentElement.nextSibling;
     let itemDisplay=e.target.parentElement.parentElement;
     let itemDisplayParent=itemDisplay.parentElement;
+    console.log(e.target);
+    console.log(taskForm);
     let itemTitleContainer=itemDisplay.querySelector("label");
     console.log(itemDisplay);
     console.log(itemTitleContainer);
@@ -23,13 +25,13 @@ const editItem = (function (e){
     let itemDescriptionContainer=itemDisplay.querySelector("p");
 
     if (e.target.textContent=="Edit"){
-
         let itemDueDate=Date(String(itemDateContainer.textContent).slice(4));
         let itemPriority=Number(String(itemPriorityContainer.textContent).slice(10));
         let itemDescription=itemDescriptionContainer.textContent;
         console.log(itemTitle,itemDueDate,itemPriority,itemDescription);
 
         titleInput.value=itemTitle;
+        console.log(itemTitle);
         descriptionInput.value=itemDescription;
         //NEED TO FIX - need to fix how date is displayed for default value
         dueDateInput.value=itemDueDate;
@@ -56,23 +58,18 @@ const editItem = (function (e){
         itemDisplay.insertBefore(Form,btnRow);
         Form.classList.remove("hidden");
 
-    } else {
-        //save new values in existing item;
-
-    
-
-
-        console.log(itemTitle);
         //remove from Project and then add new ones
         currentProject.toDoItems.forEach((item,index) => {
             if (item.title==itemTitle){
                 console.log(itemTitle);
                 currentProject.toDoItems.splice(index,1);
-            };
-        });
+                };
+            });
+        console.log(currentProject);
+    } else {
+        //save new values in existing item;        
         let editedToDoItem=new ToDoItem(editedItemTitle,editedItemDescription,editedDueDate,editedPriority,false,currentProject.projectTitle);
         currentProject.toDoItems.push(editedToDoItem);
-        console.log(currentProject);
         let editedItemInformation=editedToDoItem.displayToDoItem();
 
         //make the button an edit button
@@ -85,26 +82,8 @@ const editItem = (function (e){
         itemDisplayParent.removeChild(itemDisplay);
         const addToDoButton=document.querySelector(".add-todo");
         itemDisplayParent.insertBefore(editedItemInformation,addToDoButton)
+        console.log(currentProject);
     }
-
-
-   /* itemContainer.removeChild(itemTitleContainer);
-    itemContainer.removeChild(itemDateContainer);
-    itemContainer.removeChild(itemPriorityContainer);
-    itemContainer.removeChild(itemDescriptionContainer);
-    itemDispaly.appendChild(Form);*/
-
-
-
-    
-
-    
-    //toDoContent.insertBefore(Form,formBtnRow);
-
-    //update the item in the project
-    
-    //
-    console.log("edit clicked");
 });
 
 export {editItem};
