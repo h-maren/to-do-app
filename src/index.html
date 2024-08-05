@@ -9,8 +9,20 @@
     <div class="sidebar">
         <div class="projects-bar">
             <h3>Projects</h3>
+            <div class="projects-list">
+            </div>
         </div>
         <button class="show-project-form">Add Project</button>
+        <dialog id="project-dialog">
+            <form id="newProjectForm">
+                <label for="project-title">Please input new project title:</label>
+                <input type="text" id="project-title" name="project-title" required>
+                <div class="project-btn-row">
+                    <button type="button" id="addProjectBtn">Add Project</button>
+                    <button type="cancel" formmethod="dialog" class="cancel-project-form">Cancel</button>
+                </div>
+            </form>
+        </dialog>
     </div>
     <div class="todo-content">
         <button class="add-todo">Add To-Do Item</button>

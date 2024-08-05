@@ -10,6 +10,14 @@ class Project {
         titleProjectDisplay.textContent=`${this.projectTitle}`;
         return titleProjectDisplay;
     };
+    addProjectTitleButton () {
+        const projectButton=document.createElement("button");
+        projectButton.classList.add("project-btn");
+        projectButton.textContent=this.projectTitle;
+        return projectButton; 
+    };
 };
+
+
 
 export {Project};

@@ -2,29 +2,20 @@ import './style.css';
 import {ToDoItem} from './todocreate.js';
 import {Project} from './projectcreate.js';
 import {Form} from './createInputForm.js';
-
+import {showProjectForm, closeProjectForm, addProject} from './addProject.js';
 
 const addToDoButton=document.querySelector(".add-todo");
 const cancelBtn=document.querySelector("#cancelBtn");
 const toDoContent=document.querySelector(".todo-content");
 const formBtnRow=document.querySelector(".form-btn-row");
+const addItemBtn=document.querySelector("#addNewItemButton");
+const newProjectBtn=document.querySelector(".show-project-form");
+const closeProjectBtn=document.querySelector(".cancel-project-form");
+const addProjectBtn=document.querySelector("#addProjectBtn");
+const projectListDisplay=document.querySelector(".projects-list");
 
-//let currentToDoItems=[];
-//console.log(currentToDoItems);
-/*addToDoButton.addEventListener("click", () => {
-    addToDoForm.classList.remove("hidden");
-    addToDoButton.classList.add("hidden");
-});*/
+let allProjects=[];
 
-let currentProjects=[];
-
-
-cancelBtn.addEventListener("click", () => {
-    Form.classList.add("hidden");
-    Form.reset();
-    formBtnRow.classList.add("hidden");
-    addToDoButton.classList.remove("hidden");
-});
 
 
 //create default project
@@ -33,15 +24,29 @@ let defaultProjectDisplay=defaultProject.setProjectTitle();
 toDoContent.prepend(defaultProjectDisplay);
 let currentProject=defaultProject;
 console.log(currentProject);
+allProjects.push(currentProject);
+console.log(allProjects);
+const projectDisplayButton=defaultProject.addProjectTitleButton();
+projectListDisplay.appendChild(projectDisplayButton);
 
-//TO FIX
-const addItemBtn=document.querySelector("#addNewItemButton");
-console.log(addItemBtn);
-/*addItemBtn.addEventListener("click", () => {
+addItemBtn.addEventListener("click",addItem);
 
-    let newToDoItem=new toDoItem(inputTitle,inputDescription,inputDueDate,inputPriority);
-    projects.push(newToDoItem);
-});*/
+newProjectBtn.addEventListener("click", showProjectForm);
+closeProjectBtn.addEventListener("click", closeProjectForm);
+addProjectBtn.addEventListener("click", addProject);
+
+addToDoButton.addEventListener("click", ()=> {
+    toDoContent.insertBefore(Form,formBtnRow);
+    Form.classList.remove("hidden");
+    formBtnRow.classList.remove("hidden");
+});
+
+cancelBtn.addEventListener("click", () => {
+    Form.classList.add("hidden");
+    Form.reset();
+    formBtnRow.classList.add("hidden");
+    addToDoButton.classList.remove("hidden");
+});
 
 function addItem() {
     const inputTitle=document.querySelector("input#title").value;
@@ -66,35 +71,10 @@ function addItem() {
     //alert(projects);
 };
 
-addItemBtn.addEventListener("click",addItem);
+//display current projects on side bar
+//createProjectListDisplay();
 
-addToDoButton.addEventListener("click", ()=> {
-    toDoContent.insertBefore(Form,formBtnRow);
-    Form.classList.remove("hidden");
-    formBtnRow.classList.remove("hidden");
-});
+//create list of projects in side bar
 
 
-export {currentProject};
-
-
-
-/*function addToDoItem (){
-    const inputTitle=document.querySelector("input#title").value;
-    const inputDescription=document.querySelector("input#description").value;
-    const inputDueDate=document.querySelector("input#dueDate").value;
-    const inputPriority=document.querySelector("input#priority").value;
-    alert(inputTitle);
-    const newToDoItem=new toDoItem(inputTitle,inputDescription,inputDueDate,inputPriority);
-    alert(newToDoItem);
-    projects.push(newToDoItem);
-    console.log(newToDoItem.displayToDoItem());
-    const newItemInformation=newToDoItem.displayToDoItem;
-    alert(newItemInformation);
-    toDoContent.insertBefore(newItemInformation,addToDoButton);
-    alert("here");
-    console.log(newItemInformation);
-    alert("wait");
-};*/
-
-//console.log(projects);
+export {currentProject, allProjects};
