@@ -3,6 +3,7 @@ import { expandRows } from './expandRows.js';
 import { deleteItem } from './deleteItem.js';
 import { editItem } from './editItem.js';
 import { changeItemDone } from './changeItemDone.js';
+import { format,parseISO } from "date-fns";
 
 class ToDoItem {
     constructor(title,description,dueDate,priority,complete,projectTitle){
@@ -31,7 +32,7 @@ class ToDoItem {
         const itemLabel=document.createElement("label");
         itemLabel.setAttribute("for","itemTitle");
         itemLabel.textContent=`${this.title}`;
-        itemLabel.classList.add(`${this.title}`);
+        //itemLabel.classList.add(`${this.title}`);
 
         itemTitleDisplay.appendChild(itemCheck);
         itemTitleDisplay.appendChild(itemLabel);
@@ -39,7 +40,8 @@ class ToDoItem {
 
         const itemDueDate=document.createElement("div");
         itemDueDate.classList.add("dueDate-display");
-        itemDueDate.textContent=`Due: ${Date(this.dueDate)}`;
+        const itemDueDateText=format(new Date(parseISO(this.dueDate)), 'MM/dd/yyyy');
+        itemDueDate.textContent=`Due: ${itemDueDateText}`;
         itemRow1.appendChild(itemDueDate);
 
         const itemExpandButton=document.createElement("button");

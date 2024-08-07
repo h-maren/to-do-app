@@ -1,6 +1,7 @@
 import {Form,titleInput,descriptionInput,dueDateInput,priorityInput} from './createInputForm.js';
 import { ToDoItem } from './todocreate';
 import { allProjects } from '.';
+import { formatISO, parseISO } from "date-fns";
 
 
 const editItem = (function (e){
@@ -29,7 +30,16 @@ const editItem = (function (e){
 
 
     if (e.target.textContent=="Edit"){
-        let itemDueDate=Date(String(itemDateContainer.textContent).slice(4));
+        let itemDueDateString=String(itemDateContainer.textContent);
+        let itemDueDateMonth=Number(itemDueDateString.slice(5,7))-1;
+        //console.log(itemDueDateMonth);
+        let itemDueDateDay=itemDueDateString.slice(8,10);
+        //console.log(itemDueDateDay);
+        let itemDueDateYear=itemDueDateString.slice(11,16);
+        //console.log(itemDueDateYear);
+        let itemDueDate=formatISO(new Date(itemDueDateYear,itemDueDateMonth,itemDueDateDay,0,0), {representation: 'date'});
+        console.log(itemDueDate);
+
         let itemPriority=Number(String(itemPriorityContainer.textContent).slice(10));
         let itemDescription=itemDescriptionContainer.textContent;
         console.log(itemTitle,itemDueDate,itemPriority,itemDescription);
@@ -37,9 +47,11 @@ const editItem = (function (e){
         titleInput.value=itemTitle;
         console.log(itemTitle);
         descriptionInput.value=itemDescription;
-        //NEED TO FIX - need to fix how date is displayed for default value
+        
         dueDateInput.value=itemDueDate;
-        dueDateInput.setAttribute("default",itemDueDate);
+        console.log(allProjects);
+        console.log(itemDueDate);
+        //dueDateInput.setAttribute("default",itemDueDate);
         priorityInput.value=itemPriority;
 
         //make the button a save button
