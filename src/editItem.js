@@ -1,6 +1,6 @@
 import {Form,titleInput,descriptionInput,dueDateInput,priorityInput} from './createInputForm.js';
-import { currentProject } from ".";
 import { ToDoItem } from './todocreate';
+import { allProjects } from '.';
 
 
 const editItem = (function (e){
@@ -23,6 +23,10 @@ const editItem = (function (e){
     let itemDateContainer=itemDisplay.querySelector(".dueDate-display");
     let itemPriorityContainer=itemDisplay.querySelector(".prio-display");
     let itemDescriptionContainer=itemDisplay.querySelector("p");
+
+    let projectTitle=document.querySelector("h2").textContent;
+    let projectIndex=allProjects.findIndex(i => i.projectTitle === projectTitle);
+
 
     if (e.target.textContent=="Edit"){
         let itemDueDate=Date(String(itemDateContainer.textContent).slice(4));
@@ -59,17 +63,19 @@ const editItem = (function (e){
         Form.classList.remove("hidden");
 
         //remove from Project and then add new ones
-        currentProject.toDoItems.forEach((item,index) => {
+
+
+        allProjects[projectIndex].toDoItems.forEach((item,index) => {
             if (item.title==itemTitle){
                 console.log(itemTitle);
-                currentProject.toDoItems.splice(index,1);
+                allProjects[projectIndex].toDoItems.splice(index,1);
                 };
             });
-        console.log(currentProject);
+        console.log(allProjects);
     } else {
         //save new values in existing item;        
-        let editedToDoItem=new ToDoItem(editedItemTitle,editedItemDescription,editedDueDate,editedPriority,false,currentProject.projectTitle);
-        currentProject.toDoItems.push(editedToDoItem);
+        let editedToDoItem=new ToDoItem(editedItemTitle,editedItemDescription,editedDueDate,editedPriority,false,projectTitle);
+        allProjects[projectIndex].toDoItems.push(editedToDoItem);
         let editedItemInformation=editedToDoItem.displayToDoItem();
 
         //make the button an edit button
@@ -82,7 +88,7 @@ const editItem = (function (e){
         itemDisplayParent.removeChild(itemDisplay);
         const addToDoButton=document.querySelector(".add-todo");
         itemDisplayParent.insertBefore(editedItemInformation,addToDoButton)
-        console.log(currentProject);
+        console.log(allProjects);
     }
 });
 

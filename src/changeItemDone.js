@@ -1,4 +1,4 @@
-import { currentProject } from ".";
+import { allProjects } from ".";
 
 let changeItemDone = (function (e){
     //console.log("checked/unchecked!");
@@ -6,17 +6,18 @@ let changeItemDone = (function (e){
     //console.log(e);
     let itemRowDisplay=this.parentElement;
     let itemTitle=itemRowDisplay.querySelector("label").textContent;
-    //console.log(itemTitle);
-    let itemIndex=currentProject.toDoItems.findIndex(i => i.title === itemTitle);
-    //console.log(itemIndex);
-    //console.log(currentProject)
+    let projectTitle=document.querySelector("h2").textContent;
+    let projectIndex=allProjects.findIndex(i => i.projectTitle === projectTitle);
+    let itemIndex=allProjects[projectIndex].toDoItems.findIndex(i => i.title === itemTitle);
+    console.log(itemIndex);
+    console.log(projectIndex);
     if (e.target.checked) {
         //console.log(currentProject.toDoItems[itemIndex].complete);
-        currentProject.toDoItems[itemIndex].complete=true;
+        allProjects[projectIndex].toDoItems[itemIndex].complete=true;
     } else {
-        currentProject.toDoItems[itemIndex].complete=false;
+        allProjects[projectIndex].toDoItems[itemIndex].complete=false;
     }
-    //console.log(currentProject);
+    console.log(allProjects);
 });
 
 export {changeItemDone};

@@ -3,6 +3,7 @@ import {ToDoItem} from './todocreate.js';
 import {Project} from './projectcreate.js';
 import {Form} from './createInputForm.js';
 import {showProjectForm, closeProjectForm, addProject} from './addProject.js';
+import { addItem } from './addItem.js';
 
 const addToDoButton=document.querySelector(".add-todo");
 const cancelBtn=document.querySelector("#cancelBtn");
@@ -22,12 +23,14 @@ let allProjects=[];
 let defaultProject=new Project("My Project", []);
 let defaultProjectDisplay=defaultProject.setProjectTitle();
 toDoContent.prepend(defaultProjectDisplay);
-let currentProject=defaultProject;
-console.log(currentProject);
-allProjects.push(currentProject);
+console.log("ran again!");
+console.log(defaultProject);
+allProjects.push(defaultProject);
 console.log(allProjects);
 const projectDisplayButton=defaultProject.addProjectTitleButton();
 projectListDisplay.appendChild(projectDisplayButton);
+//let currentProject=setCurrentProject.updateCurrentProject(defaultProject);
+//console.log(currentProject);
 
 addItemBtn.addEventListener("click",addItem);
 
@@ -48,18 +51,23 @@ cancelBtn.addEventListener("click", () => {
     addToDoButton.classList.remove("hidden");
 });
 
+/*
+
 function addItem() {
     const inputTitle=document.querySelector("input#title").value;
     const inputDescription=document.querySelector("input#description").value;
     const inputDueDate=document.querySelector("input#dueDate").value;
     const inputPriority=document.querySelector("input#priority").value; 
-    const inputProjectTitle=currentProject.projectTitle;
+    const inputProjectTitle=document.querySelector("h2").textContent;
+    console.log(inputProjectTitle);
     const newToDoItem=new ToDoItem(inputTitle,inputDescription,inputDueDate,inputPriority,false,inputProjectTitle);
     //console.log(newToDoItem);
     const newItemInformation=newToDoItem.displayToDoItem();
     toDoContent.insertBefore(newItemInformation,addToDoButton);
-    currentProject.toDoItems.push(newToDoItem);
-    console.log(currentProject);
+    //find project to which it belongs and insert
+    const projectIndex=allProjects.findIndex(i => i.projectTitle === inputProjectTitle);
+    allProjects[projectIndex].toDoItems.push(newToDoItem);
+    console.log(allProjects);
     //alert(newToDoItem);
     Form.reset();
     Form.classList.add("hidden");
@@ -69,7 +77,7 @@ function addItem() {
     console.log(currentProject);
     //const addToDoForm=document.querySelector("#newtaskform");
     //alert(projects);
-};
+};*/
 
 //display current projects on side bar
 //createProjectListDisplay();
@@ -77,4 +85,4 @@ function addItem() {
 //create list of projects in side bar
 
 
-export {currentProject, allProjects};
+export {allProjects, toDoContent, addToDoButton, formBtnRow};

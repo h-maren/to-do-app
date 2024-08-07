@@ -1,31 +1,28 @@
 
-import { currentProject } from ".";
+import { toDoContent, addToDoButton, allProjects, formBtnRow } from ".";
 import { ToDoItem } from './todocreate';
 import {Form} from './createInputForm.js';
 
-let addItem = (function () {
-    const addToDoButton=document.querySelector(".add-todo");
-    const toDoContent=document.querySelector(".todo-content");
+
+const addItem = (function () {
     const inputTitle=document.querySelector("input#title").value;
     const inputDescription=document.querySelector("input#description").value;
     const inputDueDate=document.querySelector("input#dueDate").value;
     const inputPriority=document.querySelector("input#priority").value; 
-    const inputProjectTitle=currentProject.projectTitle;
+    const inputProjectTitle=document.querySelector("h2").textContent;
+    console.log(inputProjectTitle);
     const newToDoItem=new ToDoItem(inputTitle,inputDescription,inputDueDate,inputPriority,false,inputProjectTitle);
     //console.log(newToDoItem);
     const newItemInformation=newToDoItem.displayToDoItem();
     toDoContent.insertBefore(newItemInformation,addToDoButton);
-    currentProject.toDoItems.push(newToDoItem);
-    console.log(currentProject);
+    //find project to which it belongs and insert
+    const projectIndex=allProjects.findIndex(i => i.projectTitle === inputProjectTitle);
+    allProjects[projectIndex].toDoItems.push(newToDoItem);
+    console.log(allProjects);
     //alert(newToDoItem);
     Form.reset();
     Form.classList.add("hidden");
     formBtnRow.classList.add("hidden");
-    //currentToDoItems.push(newToDoItem);
-    //console.log(currentToDoItems);
-    console.log(currentProject);
-    //const addToDoForm=document.querySelector("#newtaskform");
-    //alert(projects);
 });
 
 export {addItem};

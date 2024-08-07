@@ -1,5 +1,7 @@
 //create project
 
+import { displayCurrentProject } from "./changeCurrentProject";
+
 class Project {
     constructor(projectTitle,toDoItems=[]) {
         this.projectTitle=projectTitle;
@@ -13,11 +15,10 @@ class Project {
     addProjectTitleButton () {
         const projectButton=document.createElement("button");
         projectButton.classList.add("project-btn");
+        projectButton.addEventListener("click",displayCurrentProject);
         projectButton.textContent=this.projectTitle;
         return projectButton; 
     };
 };
-
-
 
 export {Project};

@@ -1,4 +1,4 @@
-import { currentProject } from ".";
+import { allProjects } from ".";
 
 let deleteItem = (function (e){
     let itemDisplay=e.target.parentElement.parentElement;
@@ -6,13 +6,16 @@ let deleteItem = (function (e){
     let itemToDeleteTitle=itemDisplay.querySelector("label").textContent;
     itemContainer.removeChild(itemDisplay);
 
-    //remove from currentProject
-    currentProject.toDoItems.forEach((item,index) => {
+    //remove from items in allProjects
+    let projectTitle=document.querySelector("h2").textContent;
+    let projectIndex=allProjects.findIndex(i => i.projectTitle === projectTitle);
+
+    allProjects[projectIndex].toDoItems.forEach((item,index) => {
         if (item.title==itemToDeleteTitle){
-            currentProject.toDoItems.splice(index,1);
+            allProjects[projectIndex].toDoItems.splice(index,1);
         };
     });
-    console.log(currentProject);
+    console.log(allProjects);
 });
 
 export {deleteItem};

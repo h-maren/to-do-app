@@ -14,6 +14,7 @@ const closeProjectForm = (function (e) {
 });
 
 const addProject = (function (e) {
+    console.log("addproject clicked!");
     e.preventDefault();
     console.log(e);
     console.log(this);

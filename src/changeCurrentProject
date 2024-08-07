@@ -1,0 +1,41 @@
+import { toDoContent, allProjects } from "."
+import { Project } from "./projectcreate";
+
+const displayCurrentProject = (function (e) {
+    //TO FIX
+    e.preventDefault();
+    console.log("change clicked!");
+    const projectBtn=e.target;
+    console.log(projectBtn);
+    const newProjectTitle=projectBtn.textContent;
+    console.log(allProjects);
+    console.log(newProjectTitle);
+    //console.log(currentProject);
+
+    //remove projectTitle;
+    const currentProjectTitleDisplay=document.querySelector("h2");
+    toDoContent.removeChild(currentProjectTitleDisplay);
+
+    //remove all to do items
+    toDoContent.querySelectorAll('.to-do-item').forEach(e => e.remove());
+    
+    //change current project to this project
+    const projectIndex=allProjects.findIndex(i => i.projectTitle === newProjectTitle);
+    let newCurrentProject=allProjects[projectIndex];
+    console.log(newCurrentProject);
+    console.log(newProjectTitle);
+
+
+    //set display for new Project
+    const addToDoButton=document.querySelector(".add-todo");
+    const newProjectTitleDisplay = newCurrentProject.setProjectTitle();
+    toDoContent.prepend(newProjectTitleDisplay);
+    //including all toDoItems
+    newCurrentProject.toDoItems.forEach(item => {
+        const toDoItemDisplay=item.displayToDoItem();
+        toDoContent.insertBefore(toDoItemDisplay,addToDoButton);
+    }); 
+});
+
+
+export { displayCurrentProject };
