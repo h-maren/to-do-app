@@ -1,10 +1,9 @@
 //when button is clicked, open up dialog form box
 import { Project } from './projectcreate.js';
-import { allProjects} from '.';
+import { allProjects, projectListDisplay} from '.';
 import { storeProjects } from './useStorage.js';
 
 const newProjectDialog=document.querySelector("#project-dialog");
-const projectListDisplay=document.querySelector(".projects-list");
 
 const showProjectForm=(function (e) {
     newProjectDialog.showModal();

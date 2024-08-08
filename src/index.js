@@ -48,33 +48,43 @@ console.log((typeof(Storage)));
 
 if ((typeof(Storage)!==undefined) && (checkForProjects===null)){
     console.log("nothing stored!");
-    createDefaultProject();
+    let defaultProject=new Project("My Project", []);
+    createDefaultProject(defaultProject);
+    const projectDisplayButton=defaultProject.addProjectTitleButton();
+    projectListDisplay.appendChild(projectDisplayButton);
+    allProjects.push(defaultProject);
     storeProjects();
     } else {
+    console.log(checkForProjects);
+    //add methods back onto projects that are stored
+    checkForProjects.forEach(project => {
+        Object.setPrototypeOf(project,Project.prototype);
+        console.log(project);
+        //display
+        const projectDisplayButton=project.addProjectTitleButton();
+        projectListDisplay.appendChild(projectDisplayButton);
+        //add prototypes of todoitem to each item
+        project.toDoItems.forEach(item => {
+            Object.setPrototypeOf(item,ToDoItem.prototype);
+        });
+    });
+    allProjects=checkForProjects;
     console.log(allProjects);
     //recreate display if storage exists
-    //TO FIX currently does not keep methods
-    allProjects=checkForProjects; //instead of using this, create new instance of class that was stored
-    /*let defaultProject=allProjects[0];
+    let defaultProject=allProjects[0];
     console.log(defaultProject);
-    let defaultProjectDisplay=defaultProject.setProjectTitle();
-    toDoContent.prepend(defaultProjectDisplay);
-    const projectDisplayButton=defaultProject.addProjectTitleButton();
-    projectListDisplay.appendChild(projectDisplayButton);*/
+    createDefaultProject(defaultProject);
+    //add default items in main tab
+    defaultProject.toDoItems.forEach(item => {
+        const toDoItemDisplay=item.displayToDoItem();
+        toDoContent.insertBefore(toDoItemDisplay,addToDoButton);
+    });
 };
 
 
-
-
-
-
-function createDefaultProject () {
-    let defaultProject=new Project("My Project", []);
+function createDefaultProject (defaultProject) {
     let defaultProjectDisplay=defaultProject.setProjectTitle();
     toDoContent.prepend(defaultProjectDisplay);
-    allProjects.push(defaultProject);
-    const projectDisplayButton=defaultProject.addProjectTitleButton();
-    projectListDisplay.appendChild(projectDisplayButton);
 };
 
 
@@ -106,4 +116,4 @@ cancelBtn.addEventListener("click", () => {
 });
 
 
-export {allProjects, toDoContent, addToDoButton, formBtnRow, storeProjects};
+export {allProjects, toDoContent, addToDoButton, formBtnRow, projectListDisplay};
