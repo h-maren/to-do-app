@@ -1,4 +1,5 @@
 import { allProjects } from ".";
+import { storeProjects } from "./useStorage";
 
 let deleteItem = (function (e){
     let itemDisplay=e.target.parentElement.parentElement;
@@ -16,6 +17,7 @@ let deleteItem = (function (e){
         };
     });
     console.log(allProjects);
+    storeProjects();
 });
 
 export {deleteItem};

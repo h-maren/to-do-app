@@ -5,6 +5,7 @@ import {Form} from './createInputForm.js';
 import {showProjectForm, closeProjectForm, addProject} from './addProject.js';
 import { addItem } from './addItem.js';
 import { format } from "date-fns";
+import { storeProjects,retrieveProjects } from './useStorage.js';
 
 const addToDoButton=document.querySelector(".add-todo");
 const cancelBtn=document.querySelector("#cancelBtn");
@@ -16,20 +17,72 @@ const closeProjectBtn=document.querySelector(".cancel-project-form");
 const addProjectBtn=document.querySelector("#addProjectBtn");
 const projectListDisplay=document.querySelector(".projects-list");
 
+
 let allProjects=[];
 
+//check if there are projects in local storage
 
+/*let retrievalString=localStorage.getItem('allProjects');
+console.log(retrievalString);*/
+
+
+/*let storeProjects = (function (){
+    let projectsString=JSON.stringify(allProjects);
+    localStorage.setItem ('allProjects',projectsString);
+});*/
+
+/*let retrieveProjects = (function (){
+    let retrievalString=localStorage.getItem('allProjects');
+    console.log(retrievalString);
+    if (retrievalString!==undefined){
+        let retrievalProjects=JSON.parse(retrievalString);
+        console.log(retrievalProjects);
+        return retrievalProjects;
+    };
+    return undefined;
+});*/
+
+let checkForProjects=retrieveProjects();
+console.log(checkForProjects);
+console.log((typeof(Storage)));
+
+if ((typeof(Storage)!==undefined) && (checkForProjects===null)){
+    console.log("nothing stored!");
+    createDefaultProject();
+    storeProjects();
+    } else {
+    console.log(allProjects);
+    //recreate display if storage exists
+    //TO FIX currently does not keep methods
+    allProjects=checkForProjects; //instead of using this, create new instance of class that was stored
+    /*let defaultProject=allProjects[0];
+    console.log(defaultProject);
+    let defaultProjectDisplay=defaultProject.setProjectTitle();
+    toDoContent.prepend(defaultProjectDisplay);
+    const projectDisplayButton=defaultProject.addProjectTitleButton();
+    projectListDisplay.appendChild(projectDisplayButton);*/
+};
+
+
+
+
+
+
+function createDefaultProject () {
+    let defaultProject=new Project("My Project", []);
+    let defaultProjectDisplay=defaultProject.setProjectTitle();
+    toDoContent.prepend(defaultProjectDisplay);
+    allProjects.push(defaultProject);
+    const projectDisplayButton=defaultProject.addProjectTitleButton();
+    projectListDisplay.appendChild(projectDisplayButton);
+};
+
+
+//storeProjects();*/
 
 //create default project
-let defaultProject=new Project("My Project", []);
-let defaultProjectDisplay=defaultProject.setProjectTitle();
-toDoContent.prepend(defaultProjectDisplay);
-console.log("ran again!");
-console.log(defaultProject);
-allProjects.push(defaultProject);
-console.log(allProjects);
-const projectDisplayButton=defaultProject.addProjectTitleButton();
-projectListDisplay.appendChild(projectDisplayButton);
+
+
 //let currentProject=setCurrentProject.updateCurrentProject(defaultProject);
 //console.log(currentProject);
 
@@ -52,38 +105,5 @@ cancelBtn.addEventListener("click", () => {
     addToDoButton.classList.remove("hidden");
 });
 
-/*
 
-function addItem() {
-    const inputTitle=document.querySelector("input#title").value;
-    const inputDescription=document.querySelector("input#description").value;
-    const inputDueDate=document.querySelector("input#dueDate").value;
-    const inputPriority=document.querySelector("input#priority").value; 
-    const inputProjectTitle=document.querySelector("h2").textContent;
-    console.log(inputProjectTitle);
-    const newToDoItem=new ToDoItem(inputTitle,inputDescription,inputDueDate,inputPriority,false,inputProjectTitle);
-    //console.log(newToDoItem);
-    const newItemInformation=newToDoItem.displayToDoItem();
-    toDoContent.insertBefore(newItemInformation,addToDoButton);
-    //find project to which it belongs and insert
-    const projectIndex=allProjects.findIndex(i => i.projectTitle === inputProjectTitle);
-    allProjects[projectIndex].toDoItems.push(newToDoItem);
-    console.log(allProjects);
-    //alert(newToDoItem);
-    Form.reset();
-    Form.classList.add("hidden");
-    formBtnRow.classList.add("hidden");
-    //currentToDoItems.push(newToDoItem);
-    //console.log(currentToDoItems);
-    console.log(currentProject);
-    //const addToDoForm=document.querySelector("#newtaskform");
-    //alert(projects);
-};*/
-
-//display current projects on side bar
-//createProjectListDisplay();
-
-//create list of projects in side bar
-
-
-export {allProjects, toDoContent, addToDoButton, formBtnRow};
+export {allProjects, toDoContent, addToDoButton, formBtnRow, storeProjects};

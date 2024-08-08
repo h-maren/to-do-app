@@ -1,4 +1,5 @@
 import { allProjects } from ".";
+import { storeProjects } from "./useStorage";
 
 let changeItemDone = (function (e){
     //console.log("checked/unchecked!");
@@ -18,6 +19,7 @@ let changeItemDone = (function (e){
         allProjects[projectIndex].toDoItems[itemIndex].complete=false;
     }
     console.log(allProjects);
+    storeProjects();
 });
 
 export {changeItemDone};

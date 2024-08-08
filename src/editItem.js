@@ -2,6 +2,7 @@ import {Form,titleInput,descriptionInput,dueDateInput,priorityInput} from './cre
 import { ToDoItem } from './todocreate';
 import { allProjects } from '.';
 import { formatISO, parseISO } from "date-fns";
+import { storeProjects } from './useStorage.js';
 
 
 const editItem = (function (e){
@@ -101,6 +102,7 @@ const editItem = (function (e){
         const addToDoButton=document.querySelector(".add-todo");
         itemDisplayParent.insertBefore(editedItemInformation,addToDoButton)
         console.log(allProjects);
+        storeProjects();
     }
 });
 

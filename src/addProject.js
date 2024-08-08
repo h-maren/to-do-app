@@ -1,6 +1,7 @@
 //when button is clicked, open up dialog form box
 import { Project } from './projectcreate.js';
 import { allProjects} from '.';
+import { storeProjects } from './useStorage.js';
 
 const newProjectDialog=document.querySelector("#project-dialog");
 const projectListDisplay=document.querySelector(".projects-list");
@@ -29,6 +30,7 @@ const addProject = (function (e) {
     console.log(allProjects);
     const projectDisplayButton=newProject.addProjectTitleButton();
     projectListDisplay.appendChild(projectDisplayButton);
+    storeProjects();
 });
 
 export { showProjectForm, closeProjectForm, addProject }

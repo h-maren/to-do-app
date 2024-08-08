@@ -1,7 +1,8 @@
 
 import { toDoContent, addToDoButton, allProjects, formBtnRow } from ".";
-import { ToDoItem } from './todocreate';
+import { ToDoItem } from './todocreate.js';
 import {Form} from './createInputForm.js';
+import { storeProjects } from "./useStorage.js";
 
 
 const addItem = (function () {
@@ -23,6 +24,7 @@ const addItem = (function () {
     Form.reset();
     Form.classList.add("hidden");
     formBtnRow.classList.add("hidden");
+    storeProjects();
 });
 
 export {addItem};
