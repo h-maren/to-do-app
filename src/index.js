@@ -109,6 +109,7 @@ addToDoButton.addEventListener("click", ()=> {
 });
 
 cancelBtn.addEventListener("click", () => {
+    console.log(Form);
     Form.classList.add("hidden");
     Form.reset();
     formBtnRow.classList.add("hidden");

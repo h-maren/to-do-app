@@ -1,22 +1,137 @@
+@font-face {
+    font-family: 'boogalooregular';
+    src: url('fonts/boogaloo-regular-webfont.woff2') format('woff2'),
+         url('fonts/boogaloo-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'journalregular';
+    src: url('fonts/journal-webfont.woff2') format('woff2'),
+         url('fonts/journal-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h2,h3,button {
+    font-family: 'boogalooregular', Impact, 'Arial Narrow Bold', sans-serif;
+}
+
+h2,h3 {
+    color: #CeCaa7;
+}
+
+h2 {
+    font-size: 32px;
+    margin: 10px 5px;
+}
+
+h3 {
+    font-size: 42px;
+    margin: 10px 5px;
+}
+
+button {
+    margin-left: 5px;
+    font-size: 18px;
+    background-color: transparent;
+    margin: 5px;
+    color: #CeCaa7;
+}
+
 body {
+    font-family:'journalregular', Arial, Helvetica, sans-serif;
     display: grid;
     grid-template-columns: 1fr 4fr;
+    font-size: 32px;
+}
+
+p {
+    margin: 0px;
 }
 
 .sidebar {
-    border-right: 5px solid red;
+    background-color:#1B2035;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: stretch;
+    text-align: center;
+    height: 100vh;
 }
 
-.hidden {
-    display: none;
+.projects-bar .projects-list {
+    display: flex;
+    flex-direction: column;
+    flex-basis: auto;
+    align-items: stretch;
+    width: 100%;
 }
 
 .todo-display-toprow {
     display: flex;
     align-items: center;
+    gap: 10px;
     /*justify-content: space-between;
     align-items: center;*/
+}
+
+.expand-btn {
+    font-size: 14px;
+}
+
+.to-do-item {
+    margin-left: 5px;
+    margin: 0px;
+}
+
+div.itemTitleDisplay {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.todo-display-row2, .todo-display-row3{
+    margin-left: 5px;
+}
+
+.todo-content {
+    background-color:#5F2629;
+    color:#CeCaa7;
+}
+
+form#newtaskform {
+    margin-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 5px;
+}
+
+div.form-row {
+    display: flex;
+    flex: none;
+}
+input {
+    margin: 5px;
+}
+
+
+.hidden {
+    display: none;
+}
+
+form#newtaskform.hidden {
+    display: none;
+}
+
+.show-project-form {
+    font-weight: bold;
+}
+button#addProjectBtn {
+    color: black;
+}
+button.cancel-project-form {
+    color: black;
 }
